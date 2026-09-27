@@ -16,6 +16,10 @@ npm run build
 npm run lint
 ```
 
+## Publish on GitHub Pages
+
+The `main` branch workflow builds and deploys the site to GitHub Pages. In the repository settings, set **Pages → Build and deployment → Source** to **GitHub Actions**. The project-site URL will be `https://nyirishema.github.io/inezaenterprise/`.
+
 ## Pages
 
 - `/` company overview and service highlights

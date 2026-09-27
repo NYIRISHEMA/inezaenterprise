@@ -40,6 +40,8 @@ const contactEmails = [
   'info@inezaenterprise.com',
 ]
 
+const publicAsset = (fileName) => `${import.meta.env.BASE_URL}${fileName}`
+
 const travelOptions = [
   ['City car', 'Comfortable, efficient travel for Kigali meetings and everyday journeys.'],
   ['SUV & 4×4', 'Extra space and confidence for countryside routes and changing road conditions.'],
@@ -50,12 +52,12 @@ const travelOptions = [
 ]
 
 const homeSlides = [
-  { image: '/south-web.jpg', title: 'Southern Rwanda', alt: 'Travel scenery in southern Rwanda' },
-  { image: '/north-web.jpg', title: 'Northern Rwanda', alt: 'Travel scenery in northern Rwanda' },
-  { image: '/cardisplay.jpg', title: 'A car for your journey', alt: 'Ineza Enterprise rental car ready for a trip' },
-  { image: '/lodge.jpg', title: 'Stay a little longer', alt: 'A lodge destination in Rwanda' },
-  { image: '/887A2704-web.jpg', title: 'Catering for your occasion', alt: 'Real event setup catered by Ineza Enterprise' },
-  { image: '/887A2712-web.jpg', title: 'A table ready to welcome you', alt: 'Real catering and hospitality at an Ineza Enterprise event' },
+  { image: publicAsset('south-web.jpg'), title: 'Southern Rwanda', alt: 'Travel scenery in southern Rwanda' },
+  { image: publicAsset('north-web.jpg'), title: 'Northern Rwanda', alt: 'Travel scenery in northern Rwanda' },
+  { image: publicAsset('cardisplay.jpg'), title: 'A car for your journey', alt: 'Ineza Enterprise rental car ready for a trip' },
+  { image: publicAsset('lodge.jpg'), title: 'Stay a little longer', alt: 'A lodge destination in Rwanda' },
+  { image: publicAsset('887A2704-web.jpg'), title: 'Catering for your occasion', alt: 'Real event setup catered by Ineza Enterprise' },
+  { image: publicAsset('887A2712-web.jpg'), title: 'A table ready to welcome you', alt: 'Real catering and hospitality at an Ineza Enterprise event' },
 ]
 
 function SiteLayout() {
@@ -71,7 +73,7 @@ function SiteLayout() {
       <header className="site-header">
         <div className="header-inner">
           <Link className="wordmark" to="/" aria-label="Ineza Enterprise home">
-            <img className="brand-logo" src="/inezalogo.png" alt="Ineza Enterprise Ltd" />
+            <img className="brand-logo" src={publicAsset('inezalogo.png')} alt="Ineza Enterprise Ltd" />
           </Link>
           <button
             className="menu-toggle"
@@ -271,7 +273,7 @@ function HomePage() {
             </div>
           </article>
           <article className="service-feature service-feature-catering">
-            <div className="feature-photo catering-photo" role="img" aria-label="Catering and event hosting by Ineza Enterprise"><span className="feature-number">02</span></div>
+            <div className="feature-photo catering-photo" style={{ '--catering-photo': `url("${publicAsset('887A2704-web.jpg')}")` }} role="img" aria-label="Catering and event hosting by Ineza Enterprise"><span className="feature-number">02</span></div>
             <div className="feature-copy">
               <div className="feature-icon feature-icon-coral"><UtensilsCrossed size={20} /></div>
               <SectionLabel>EVENT CATERING</SectionLabel>
@@ -294,8 +296,12 @@ function HomePage() {
 }
 
 function PageIntro({ eyebrow, title, description, imageClass }) {
+  const imageStyle = imageClass === 'contact-intro'
+    ? { '--intro-image': `url("${publicAsset('cbd.png')}")` }
+    : undefined
+
   return (
-    <section className={`page-intro ${imageClass || ''}`}>
+    <section className={`page-intro ${imageClass || ''}`} style={imageStyle}>
       <div className="page-intro-copy"><SectionLabel>{eyebrow}</SectionLabel><h1>{title}</h1><p>{description}</p></div>
       <div className="page-intro-mark"><ArrowDownRight size={34} strokeWidth={1.2} /></div>
     </section>
@@ -350,7 +356,7 @@ function ServicesPage() {
       <section className="travel-section section-wrap">
         <div className="service-section-heading"><div><SectionLabel>01 / GETTING AROUND</SectionLabel><h2>Travel & tours</h2></div><p>A car that fits the trip, with arrangements that fit your plans. We’ll help you choose the right option and confirm availability for your dates.</p></div>
         <div className="travel-showcase">
-          <div className="travel-showcase-photo"><img src="/cardisplay.jpg" alt="Rental car available from Ineza Enterprise" /></div>
+          <div className="travel-showcase-photo"><img src={publicAsset('cardisplay.jpg')} alt="Rental car available from Ineza Enterprise" /></div>
           <div className="travel-slide-copy" aria-live="polite">
             <span className="travel-slide-count">{String(activeTravelOption + 1).padStart(2, '0')} <span>/ {String(travelOptions.length).padStart(2, '0')}</span></span>
             <SectionLabel>TRAVEL OPTIONS</SectionLabel>
@@ -369,12 +375,12 @@ function ServicesPage() {
       </section>
       <section className="catering-section">
         <div className="catering-gallery" aria-label="In-house hosting and catering photographs">
-          <img className="catering-gallery-feature" src="/887A2704-web.jpg" alt="Ineza Enterprise in-house catering event" loading="lazy" decoding="async" />
-          <img src="/887A2712-web.jpg" alt="Catering and hospitality at an Ineza Enterprise event" loading="lazy" decoding="async" />
-          <img src="/887A2715-web.jpg" alt="Food service for an Ineza Enterprise gathering" loading="lazy" decoding="async" />
-          <img src="/887A2738-web.jpg" alt="An event catered by Ineza Enterprise" loading="lazy" decoding="async" />
-          <img src="/887A2741-web.jpg" alt="In-house catering and hosting by Ineza Enterprise" loading="lazy" decoding="async" />
-          <img src="/887A2752-web.jpg" alt="Outside catering service by Ineza Enterprise" loading="lazy" decoding="async" />
+          <img className="catering-gallery-feature" src={publicAsset('887A2704-web.jpg')} alt="Ineza Enterprise in-house catering event" loading="lazy" decoding="async" />
+          <img src={publicAsset('887A2712-web.jpg')} alt="Catering and hospitality at an Ineza Enterprise event" loading="lazy" decoding="async" />
+          <img src={publicAsset('887A2715-web.jpg')} alt="Food service for an Ineza Enterprise gathering" loading="lazy" decoding="async" />
+          <img src={publicAsset('887A2738-web.jpg')} alt="An event catered by Ineza Enterprise" loading="lazy" decoding="async" />
+          <img src={publicAsset('887A2741-web.jpg')} alt="In-house catering and hosting by Ineza Enterprise" loading="lazy" decoding="async" />
+          <img src={publicAsset('887A2752-web.jpg')} alt="Outside catering service by Ineza Enterprise" loading="lazy" decoding="async" />
         </div>
         <div className="catering-content"><SectionLabel>02 / AROUND THE TABLE</SectionLabel><h2>In-house & outside catering</h2><p className="catering-lede">A good gathering deserves food that feels considered and service that lets you be present.</p><div className="catering-details"><div><h3>In-house functions</h3><p>Catering for gatherings hosted within your home, office, or organization, planned around your guests and timing.</p></div><div><h3>Outside events</h3><p>We bring catering to your chosen venue, with setup and service planned around the occasion.</p></div></div><div className="catering-tags"><span>Corporate & team meals</span><span>Private celebrations</span><span>Weddings & receptions</span><span>Buffet or plated service</span><span>Menu planning</span></div><p className="catering-note">Menu, guest count, dietary needs, service style, and venue can all be discussed when you enquire.</p><Link className="button button-green" to="/contact">Plan an event <ArrowRight size={17} /></Link></div>
       </section>
@@ -437,7 +443,7 @@ function Footer() {
     <footer className="site-footer">
       <div className="footer-main">
         <div className="footer-brand">
-          <Link className="wordmark wordmark-footer" to="/" aria-label="Ineza Enterprise home"><img className="brand-logo" src="/inezalogo.png" alt="Ineza Enterprise Ltd" /></Link>
+          <Link className="wordmark wordmark-footer" to="/" aria-label="Ineza Enterprise home"><img className="brand-logo" src={publicAsset('inezalogo.png')} alt="Ineza Enterprise Ltd" /></Link>
           <p>Thoughtful travel and warm hospitality, from Kigali across Rwanda.</p>
           <span className="footer-location"><MapPin size={15} /> Kigali, Rwanda</span>
         </div>
@@ -458,7 +464,7 @@ function Footer() {
 }
 
 function App() {
-  return <BrowserRouter><SiteLayout /></BrowserRouter>
+  return <BrowserRouter basename={import.meta.env.BASE_URL}><SiteLayout /></BrowserRouter>
 }
 
 export default App

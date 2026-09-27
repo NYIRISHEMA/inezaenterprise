@@ -437,7 +437,7 @@
 }
 
 .catering-photo {
-  background-image: url('/887A2704-web.jpg');
+  background-image: var(--catering-photo);
 }
 
 .feature-number {
@@ -694,7 +694,7 @@
 }
 
 .contact-intro::after {
-  background-image: url('/cbd.png');
+  background-image: var(--intro-image);
 }
 
 .page-intro-copy {
